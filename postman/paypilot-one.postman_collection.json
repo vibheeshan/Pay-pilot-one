@@ -1,0 +1,151 @@
+{
+  "info": {
+    "_postman_id": "c1f78239-4981-4ba2-82ab-b19b841829e1",
+    "name": "PayPilot One API Collection",
+    "description": "Comprehensive Postman collection covering System Health, Multi-Agent Copilot, Authoritative PayPal Sandbox orders, Captures, Webhooks, and Invoice Overdue Checks.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "System Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "PayPal Sandbox – Create Order (Authoritative Price)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    {\n      \"product_id\": \"prod_01\",\n      \"quantity\": 2\n    },\n    {\n      \"product_id\": \"prod_02\",\n      \"quantity\": 1\n    }\n  ],\n  \"source\": \"agentcart\",\n  \"customer\": {\n    \"name\": \"Sarah Chen\",\n    \"email\": \"sarah.chen@apexdigital.tech\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/paypal/create-order",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "paypal", "create-order"]
+        }
+      }
+    },
+    {
+      "name": "PayPal Sandbox – Capture Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"PAYPAL-SB-1794135240170-1398\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/paypal/capture-order",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "paypal", "capture-order"]
+        }
+      }
+    },
+    {
+      "name": "PayPal Sandbox – Webhook Idempotent Receiver",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "paypal-event-id", "value": "evt_sample_test_001" },
+          { "key": "paypal-transmission-sig", "value": "mock_sig_sandbox" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"evt_sample_test_001\",\n  \"event_type\": \"PAYMENT.CAPTURE.COMPLETED\",\n  \"resource\": {\n    \"id\": \"PP-CAP-123\",\n    \"amount\": { \"value\": \"427.69\", \"currency_code\": \"USD\" }\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/paypal/webhook",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "paypal", "webhook"]
+        }
+      }
+    },
+    {
+      "name": "PayPal Sandbox – Webhook Event Log",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/paypal/events",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "paypal", "events"]
+        }
+      }
+    },
+    {
+      "name": "PayPilot Copilot – Multi-Agent Chat",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"What is my total revenue this month and which invoices are overdue?\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/copilot/chat",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "copilot", "chat"]
+        }
+      }
+    },
+    {
+      "name": "Invoices – Check Overdue Accounts",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"invoices\": [\n    {\n      \"id\": \"inv_01\",\n      \"invoice_number\": \"INV-2026-001\",\n      \"customer_name\": \"Sarah Chen\",\n      \"total_amount\": 1420.00,\n      \"due_date\": \"2026-02-01\",\n      \"status\": \"issued\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/invoices/check-overdue",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "invoices", "check-overdue"]
+        }
+      }
+    },
+    {
+      "name": "Ledger – Cross-Module Reconciliation",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orders\": [],\n  \"invoices\": [],\n  \"payments\": []\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/reconciliation/run",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "reconciliation", "run"]
+        }
+      }
+    }
+  ]
+}

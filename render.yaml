@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: paypilot-one
+    env: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Google Gemini — set via Render dashboard, never hardcoded
+      - key: GEMINI_API_KEY
+        sync: false
+      # Supabase — public vars baked into the frontend bundle at build
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      # Supabase service-role key — server only, never exposed to browser
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      # PayPal Sandbox — all server-side only
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false

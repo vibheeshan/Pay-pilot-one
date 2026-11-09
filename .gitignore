@@ -1,0 +1,123 @@
+# ==============================================================================
+# PayPilot One — Git Ignore Specification
+# Comprehensive ignore rules for Node.js, Express, React, Vite, Supabase & IDEs
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment & Sensitive Credentials (CRITICAL)
+# Never commit real credentials, API keys, or private tokens
+# ------------------------------------------------------------------------------
+.env
+.env.*
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Preserve only documentation templates for environment setup
+!.env.example
+!.env.template
+
+# Private Keys & Certificates
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cert
+
+# ------------------------------------------------------------------------------
+# 2. Dependencies
+# ------------------------------------------------------------------------------
+node_modules/
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.npm/
+
+# ------------------------------------------------------------------------------
+# 3. Production Builds & Compiled Artifacts
+# ------------------------------------------------------------------------------
+dist/
+dist-ssr/
+build/
+out/
+server.js
+*.tsbuildinfo
+
+# ------------------------------------------------------------------------------
+# 4. Logs & Debugging
+# ------------------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ------------------------------------------------------------------------------
+# 5. Testing & Code Coverage
+# ------------------------------------------------------------------------------
+coverage/
+.nyc_output/
+.vitest/
+
+# ------------------------------------------------------------------------------
+# 6. Operating System Specific
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ------------------------------------------------------------------------------
+# 7. IDE & Code Editors
+# ------------------------------------------------------------------------------
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains / WebStorm
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------------------------------------------------------
+# 8. Temporary Files & Local Caches
+# ------------------------------------------------------------------------------
+tmp/
+temp/
+.tmp/
+.temp/
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Supabase CLI Local Runtime Cache
+.supabase/
+supabase/.temp/
+

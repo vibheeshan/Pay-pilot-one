@@ -1,0 +1,6 @@
+{
+  "name": "PayPilot One",
+  "description": "Unified AI-Powered Business, Commerce & Payment Ecosystem connecting PayPilot AI, AgentCart AI, GiveAI, InvoiceMind AI, and PayPilot Copilot.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
